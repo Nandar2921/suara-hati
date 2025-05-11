@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kita Layak Diperjuangkan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .page { display: none; }
+    .active { display: block; }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-rose-100 via-white to-pink-200 text-gray-800 min-h-screen p-6 relative">
+
+  <!-- Musik -->
+  <audio id="bgMusic" loop>
+    <source src="musik.mp3" type="audio/mp3">
+    Browser kamu tidak mendukung audio.
+  </audio>
+
+  <!-- Kontainer Utama -->
+  <div class="max-w-2xl mx-auto bg-white bg-opacity-90 p-8 rounded-2xl shadow-2xl border border-pink-300">
+
+    <!-- Halaman Utama -->
+    <div id="page1" class="page active text-center">
+      <h1 class="text-4xl font-bold text-pink-600 mb-4">Kita Layak Diperjuangkan</h1>
+      <p class="mb-4">Cinta yang sehat dibangun dari kejujuran dan kepercayaan.</p>
+      <p class="mb-6">Aku sadar kita nggak sempurna, tapi aku percaya... kita bisa saling tumbuh dan memperbaiki.</p>
+      <div class="flex flex-col gap-4">
+        <button onclick="showPage(2)" class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-xl">Aku Pernah Salah</button>
+        <button onclick="showPage(3)" class="bg-rose-400 hover:bg-rose-500 text-white px-6 py-3 rounded-xl">Komitmen Kita</button>
+      </div>
+    </div>
+
+    <!-- Halaman Aku Pernah Salah -->
+    <div id="page2" class="page text-center">
+      <h1 class="text-3xl font-bold text-pink-600 mb-4">Aku Pernah Salah</h1>
+      <p class="mb-4">Aku sadar, mungkin aku pernah bikin kamu ragu, kecewa, atau bahkan sakit hati.</p>
+      <p class="mb-4">Aku nggak mau sembunyi dari itu. Aku mau jujur bahwa aku pun sedang belajar jadi lebih baik – untuk kita.</p>
+      <p class="mb-6">Aku mau kamu tahu bahwa kamu berhak merasa aman, dan aku mau jadi tempat itu.</p>
+      <div class="flex flex-col gap-4">
+        <button onclick="showPage(3)" class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-xl">Lanjut ke Komitmen Kita</button>
+        <button onclick="showPage(1)" class="text-sm text-gray-500 hover:underline">Kembali</button>
+      </div>
+    </div>
+
+    <!-- Halaman Komitmen Kita -->
+    <div id="page3" class="page text-center">
+      <h1 class="text-3xl font-bold text-pink-600 mb-4">Komitmen Kita</h1>
+      <p class="mb-4">Aku nggak janji jadi yang paling sempurna, tapi aku janji akan selalu berusaha jadi versi terbaik dari diriku – buat kita.</p>
+      <p class="mb-4">Aku mau kita saling terbuka, saling percaya, dan saling jaga. Bukan hanya saat semuanya mudah, tapi juga saat susah.</p>
+      <p class="mb-6">Kalau kamu siap, aku juga siap. Bukan cuma jadi pasangan, tapi jadi tim yang saling tumbuh.</p>
+      <div class="flex flex-col gap-4">
+        <button onclick="showPage(1)" class="bg-rose-500 hover:bg-rose-600 text-white px-6 py-3 rounded-xl">Kembali ke Halaman Utama</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Musik Fallback Button -->
+  <script>
+    // Navigasi antar halaman
+    function showPage(n) {
+      document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+      document.getElementById('page' + n).classList.add('active');
+    }
+
+    // Musik
+    window.addEventListener('load', () => {
+      const audio = document.getElementById('bgMusic');
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Jika autoplay gagal
+          const btn = document.createElement("button");
+          btn.textContent = "Putar Musik 🎵";
+          btn.className = "fixed bottom-4 right-4 bg-pink-500 text-white px-4 py-2 rounded-xl shadow-lg";
+          btn.onclick = () => {
+            audio.play();
+            btn.remove();
+          };
+          document.body.appendChild(btn);
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
